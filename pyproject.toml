@@ -1,0 +1,20 @@
+[project]
+name = "kodi-content-adviser"
+version = "0.0.0"
+description = "Motor de recomendacion para Kodi"
+requires-python = ">=3.8"
+dependencies = []
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+# El formateo con `%` es deliberado y comun a los proyectos Kodi de esta familia
+# (`kodi-addon-nextcloud`, `kodi-addon-cec`). No se cambia solo por uniformar con
+# f-strings: el nucleo se lee al lado de esos repositorios.
+ignore = ["UP031"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

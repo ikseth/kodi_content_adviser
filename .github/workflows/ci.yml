@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.8 es el suelo razonable para el Python embebido de Kodi 21;
+        # 3.13 es lo que corre la maquina de desarrollo.
+        python: ["3.8", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Instalar lo justo
+        run: python -m pip install --upgrade pip pytest ruff
+
+      # Primero lo que los proyectos hermanos no comprobaban: que compila.
+      # Alli 841 pruebas no vieron un NameError porque ninguna ejecutaba nada.
+      - name: Compila todo
+        run: python -m compileall -q core tools tests addon
+
+      - name: Lint
+        run: ruff check core tools tests addon
+
+      - name: Formato de importaciones
+        run: ruff check --select I core tools tests addon
+
+      - name: Pruebas
+        run: python -m pytest tests -q
+
+      # Este repositorio es publico. La prueba de privacidad necesita el
+      # historial para listar los ficheros versionados, asi que se deja explicito.
+      - name: No se publican datos de una red concreta
+        run: python -m pytest tests/test_privacidad.py -q
+
+      # Y que los puntos de entrada arrancan de verdad como proceso.
+      - name: Los puntos de entrada responden
+        run: |
+          python tools/build_index.py --help > /dev/null
+          python tools/evaluate.py --help > /dev/null
+
+      - name: El ZIP se construye
+        run: ./build_zip.sh

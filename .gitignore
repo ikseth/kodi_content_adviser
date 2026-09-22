@@ -1,0 +1,47 @@
+# Artefactos de empaquetado
+dist/
+*.zip
+*.zip.sha256
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+
+# Editores y sistema
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Copias de trabajo de la biblioteca. Son grandes y no son nuestras.
+*.db
+*.db-wal
+*.db-shm
+
+# Indices generados. Se construyen, no se versionan.
+indice/
+*.indice.json
+
+# Claves de servicios externos (TMDB) y configuracion real de nodos.
+*.local.json
+secretos.ini
+
+# Credenciales de una instalacion concreta. Las de este proyecto viven fuera del
+# repositorio, pero la regla esta aqui para que un .env creado por descuido dentro
+# del arbol no acabe en un remoto publico.
+*.env
+
+# Contexto operativo local. Fuera del repositorio a proposito: lleva nombres de
+# maquinas, direcciones internas y cuentas del servicio. Nada de eso tiene por
+# que viajar a un remoto, ni siquiera privado.
+CLAUDE.md
+
+# La documentacion de trabajo se queda fuera del repositorio. Describe una
+# instalacion concreta —tamano del catalogo, titulos reales, los equipos donde se
+# midio, puertos y donde se publican los ZIP— y nada de eso es del complemento ni
+# le sirve a quien lo instale.
+docs/

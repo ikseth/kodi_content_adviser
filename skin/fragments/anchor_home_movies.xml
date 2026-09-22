@@ -1,0 +1,2 @@
+						<include content="WidgetListPoster" condition="Library.HasContent(movies)">
+							<param name="content_path" value="special://skin/playlists/inprogress_movies.xsp"/>

@@ -1,0 +1,246 @@
+# Kodi Media Center language file
+# Addon Name: Content Adviser
+# Addon id: plugin.video.content.adviser
+msgid ""
+msgstr ""
+"Project-Id-Version: Content Adviser\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_ES\n"
+
+msgctxt "#30000"
+msgid "Content Adviser"
+msgstr "Content Adviser"
+
+msgctxt "#30001"
+msgid "Because you watched..."
+msgstr "Porque has visto..."
+
+msgctxt "#30010"
+msgid "Similar to this"
+msgstr "Similares a esta"
+
+msgctxt "#30020"
+msgid "Because you watched %s"
+msgstr "Porque viste %s"
+
+msgctxt "#30030"
+msgid "The index is not ready yet. It is being built in the background."
+msgstr "El índice todavía no está listo. Se está construyendo en segundo plano."
+
+msgctxt "#30031"
+msgid "Nothing watched yet, so there is nothing to base a recommendation on."
+msgstr "Aún no has visto nada, así que no hay de dónde partir."
+
+msgctxt "#30032"
+msgid "Nothing reached the confidence threshold."
+msgstr "Nada alcanza el umbral de confianza."
+
+msgctxt "#30033"
+msgid "This item is not in the library."
+msgstr "Este elemento no está en la biblioteca."
+
+msgctxt "#30034"
+msgid "Only films for now."
+msgstr "De momento solo películas."
+
+msgctxt "#30100"
+msgid "Recommendations"
+msgstr "Recomendaciones"
+
+msgctxt "#30101"
+msgid "Confidence threshold"
+msgstr "Umbral de confianza"
+
+msgctxt "#30102"
+msgid "Maximum slots per watched title"
+msgstr "Huecos máximos por título visto"
+
+msgctxt "#30103"
+msgid "Recent titles taken into account"
+msgstr "Títulos recientes que se tienen en cuenta"
+
+msgctxt "#30104"
+msgid "Results per row"
+msgstr "Resultados por fila"
+
+msgctxt "#30105"
+msgid "Also count what was started and left unfinished"
+msgstr "Contar también lo empezado y no acabado"
+
+msgctxt "#30110"
+msgid "Index"
+msgstr "Índice"
+
+msgctxt "#30111"
+msgid "Include cast and external identifiers (slower)"
+msgstr "Incluir reparto e identificadores (más lento)"
+
+msgctxt "#30112"
+msgid "Rebuild after the library is scanned"
+msgstr "Reconstruir tras escanear la biblioteca"
+
+msgctxt "#30151"
+msgid "Below this score the adviser stays quiet instead of padding the row with noise."
+msgstr "Por debajo de esta puntuación el recomendador calla en vez de rellenar con ruido."
+
+msgctxt "#30152"
+msgid "Stops one watched title with a saga behind it from taking over the whole row."
+msgstr "Evita que un título con una saga detrás se quede con la fila entera."
+
+msgctxt "#30153"
+msgid "How far back to look in your viewing history."
+msgstr "Cuánto se mira hacia atrás en tu historial."
+
+msgctxt "#30154"
+msgid "How many results a row shows at most."
+msgstr "Cuántos resultados enseña una fila como máximo."
+
+msgctxt "#30155"
+msgid "Something started and abandoned may mean the opposite of a liking."
+msgstr "Algo empezado y abandonado puede significar lo contrario de que guste."
+
+msgctxt "#30161"
+msgid "Better recommendations, but the first build takes much longer on slow devices."
+msgstr "Recomienda mejor, pero la primera construcción tarda mucho más en equipos lentos."
+
+msgctxt "#30162"
+msgid "Keeps the index in step with your library."
+msgstr "Mantiene el índice al día con tu biblioteca."
+
+msgctxt "#30040"
+msgid "(not in your library)"
+msgstr "(no la tienes)"
+
+msgctxt "#30041"
+msgid "This title is not in your library. It is shown as a suggestion, and cannot be played."
+msgstr "Este título no está en tu biblioteca. Aparece como sugerencia y no se puede reproducir."
+
+msgctxt "#30120"
+msgid "External source"
+msgstr "Fuente externa"
+
+msgctxt "#30121"
+msgid "Ask an external source when the local engine falls short"
+msgstr "Preguntar a una fuente externa cuando el motor local no llegue"
+
+msgctxt "#30122"
+msgid "Also show titles you do not have, marked"
+msgstr "Enseñar también los títulos que no tienes, marcados"
+
+msgctxt "#30171"
+msgid "Uses TMDb Helper if it is installed. Only for «similar to this», never for the home row."
+msgstr "Usa TMDb Helper si está instalado. Solo en «similares a esta», nunca en la fila de inicio."
+
+msgctxt "#30172"
+msgid "They cannot be played. Useful as a wish list; turn it off to see only what you own."
+msgstr "No se pueden reproducir. Sirven como lista de deseos; desactívalo para ver solo lo tuyo."
+
+msgctxt "#30035"
+msgid "Nothing in your library matches that."
+msgstr "No hay nada en tu biblioteca que coincida."
+
+msgctxt "#30130"
+msgid "Search"
+msgstr "Búsqueda"
+
+msgctxt "#30131"
+msgid "Suggestions shown while typing"
+msgstr "Sugerencias que se enseñan al teclear"
+
+msgctxt "#30181"
+msgid "They come from your own library: titles, directors and cast. More than the keyboard fits is wasted."
+msgstr "Salen de tu propia biblioteca: títulos, directores y reparto. Más de las que caben en el teclado sobran."
+
+msgctxt "#30002"
+msgid "Ask for something"
+msgstr "Pídeme algo"
+
+msgctxt "#30036"
+msgid "The AI service is not set up. You can turn it on in the add-on settings."
+msgstr "El servicio de IA no está configurado. Puedes activarlo en los ajustes del complemento."
+
+msgctxt "#30037"
+msgid "What do you feel like watching?"
+msgstr "¿Qué te apetece ver?"
+
+msgctxt "#30038"
+msgid "Asking..."
+msgstr "Preguntando..."
+
+msgctxt "#30039"
+msgid "The AI service did not answer."
+msgstr "El servicio de IA no ha contestado."
+
+msgctxt "#30140"
+msgid "Artificial intelligence"
+msgstr "Inteligencia artificial"
+
+msgctxt "#30141"
+msgid "Enable asking in plain language"
+msgstr "Permitir preguntar en lenguaje natural"
+
+msgctxt "#30142"
+msgid "Service"
+msgstr "Servicio"
+
+msgctxt "#30143"
+msgid "OpenAI-compatible (Ollama, own server, OpenAI...)"
+msgstr "Compatible con OpenAI (Ollama, servidor propio, OpenAI...)"
+
+msgctxt "#30144"
+msgid "Claude (Anthropic)"
+msgstr "Claude (Anthropic)"
+
+msgctxt "#30145"
+msgid "Base URL"
+msgstr "URL base"
+
+msgctxt "#30146"
+msgid "Model"
+msgstr "Modelo"
+
+msgctxt "#30147"
+msgid "API key"
+msgstr "Clave de acceso"
+
+msgctxt "#30191"
+msgid "Off by default. Everything else works without it: this only adds one more way in."
+msgstr "Apagado por defecto. Todo lo demás funciona sin esto: solo añade una entrada más."
+
+msgctxt "#30192"
+msgid "Most services speak the OpenAI dialect, Ollama included."
+msgstr "Casi todos los servicios hablan el dialecto de OpenAI, Ollama incluido."
+
+msgctxt "#30193"
+msgid "For a local Ollama, http://<host>:11434/v1 . For IA_NEST, its REST address."
+msgstr "Para un Ollama local, http://<host>:11434/v1 . Para IA_NEST, la direccion de su REST."
+
+msgctxt "#30194"
+msgid "The model name as the service knows it. Leave it blank for IA_NEST: its own router picks."
+msgstr "El nombre del modelo tal como lo conoce el servicio. Dejalo en blanco para IA_NEST: su router elige."
+
+msgctxt "#30195"
+msgid "A local service usually needs none. It never leaves this device except to the service you set."
+msgstr "Un servicio local no suele necesitarla. No sale de este equipo salvo hacia el servicio que configures."
+
+msgctxt "#30148"
+msgid "IA_NEST (own server)"
+msgstr "IA_NEST (servidor propio)"
+
+msgctxt "#30003"
+msgid "Install the external source (TMDb Helper)"
+msgstr "Instalar la fuente externa (TMDb Helper)"
+
+msgctxt "#30042"
+msgid "Nothing usable came out of that request. Try saying it another way."
+msgstr "De esa petición no salió nada aplicable. Prueba a decirlo de otra forma."
+
+msgctxt "#30149"
+msgid "Who is asking"
+msgstr "Quién pregunta"
+
+msgctxt "#30196"
+msgid "Some services require it and can use it to remember. Only reaches the service you set."
+msgstr "Algunos servicios lo exigen y lo usan para recordar. Solo llega al servicio que configures."

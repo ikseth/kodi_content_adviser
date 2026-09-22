@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.content.adviser" name="Content Adviser" version="0.5.0" provider-name="IG">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py" start="login" />
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="context.py">
+        <label>30010</label>
+        <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <!-- El predictivo se invoca en cada pulsacion. Sin reutilizar el interprete,
+         arrancar Python domina el tiempo de respuesta. Exige que default.py no
+         guarde estado de modulo, y no lo guarda: hay un test que lo vigila. -->
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <summary lang="es_ES">Recomienda peliculas y series de tu propia biblioteca</summary>
+    <summary lang="en_GB">Recommends films and shows from your own library</summary>
+    <description lang="es_ES">Recomienda contenido del catalogo que ya tienes: obras parecidas a la que estas mirando, y una seleccion a partir de lo ultimo que has visto. Funciona sin red y sin cuentas: lee tu biblioteca por JSON-RPC, asi que le da igual que use SQLite o MySQL, y construye un indice local en segundo plano. No escribe nada en tu biblioteca. Cuando no tiene una respuesta con suficiente confianza, calla en vez de rellenar con ruido.</description>
+    <description lang="en_GB">Recommends content from the catalogue you already own: titles similar to the one you are looking at, and a selection based on what you watched last. Works with no network and no accounts: it reads your library over JSON-RPC, so it does not care whether it is backed by SQLite or MySQL, and builds a local index in the background. It never writes to your library. When it has no confident answer it stays quiet instead of padding the row with noise.</description>
+    <news>0.5.0
+- Se pueden encadenar generos con «y» y con «o», y no significan lo mismo: uno exige los dos, el otro se conforma con cualquiera.
+- Las sugerencias ya no piden decir si es pelicula o serie: el sistema ya lo sabe.
+- Los generos se ofrecen empezando por los que mas obras tienen en tu catalogo.
+
+0.4.3
+- «Pidemelo» ya sabe si le preguntas por una pelicula o por una serie, y ofrece el vocabulario de cada una.
+
+0.4.2
+- Arreglado: al actualizar desde una version anterior, el indice no se rehacia y se quedaba sin el material nuevo. Solo pasaba actualizando, nunca instalando de cero.
+
+0.4.1
+- La fila de recomendaciones ya no se pone por delante de «continuar viendo».
+- Los servicios de IA que piden identidad la reciben, con una sesion por arranque de Kodi.
+- En los equipos con el complemento de Nextcloud, «actualizar biblioteca» recibe la ya curada en vez de reescanear.
+
+0.4.0
+- «Pidemelo» aparece ahora en la fila de categorias de peliculas y de series, sin bajar a Complementos de video.
+- «Similares a esta» tambien como boton en la ficha de la pelicula, junto a Reproducir y Trailer.
+- Se puede preguntar por series, no solo por peliculas.
+
+0.3.3
+- Arreglado: el buscador de titulos enseñaba la palabra «title» en vez del titulo. Se colo al anadir el modo de composicion.
+- Al preguntar a la IA, el teclado sugiere trozos de frase sacados de tu catalogo, para no tener que escribirla con el mando.
+
+0.3.2
+- El servicio de IA ya no trae un modelo por defecto: uno correcto para un proveedor es falso para otro.
+- Cuando el servicio de IA rechaza algo, el motivo se ve en pantalla y no solo en el registro.
+- «No entendi la peticion» y «no tienes nada asi» dejan de ser el mismo mensaje.
+
+0.3.1
+- Si la fuente externa esta pedida pero no instalada, el menu ofrece instalarla en vez de dejarte buscarla a mano.
+
+0.3.0
+- Primera version publicada. Se distribuye sin la capa de IA: el codigo no viaja en el paquete, asi que no hay nada que activar por error.
+- Preguntar en lenguaje natural sigue existiendo como variante aparte, para quien tenga un servicio propio.
+
+0.2.0
+- Cuando el motor local no llega, se pregunta a una fuente externa y se marca lo que no esta en tu biblioteca.
+- Buscador predictivo sobre tu propio catalogo: titulos, directores y reparto, sin acentos y por cualquier palabra.
+- Se reutiliza el interprete de Python entre invocaciones: las sugerencias bajan de 160-470 ms a 20-180 ms.
+
+0.1.0
+- Version inicial. Listado de recomendaciones, menu contextual «Similares a esta» y construccion del indice en segundo plano.</news>
+    <platform>all</platform>
+    <license>GPL-3.0-or-later</license>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.png</fanart>
+    </assets>
+    <forum></forum>
+    <website></website>
+  </extension>
+</addon>

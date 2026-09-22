@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings version="1">
+  <section id="plugin.video.content.adviser">
+    <category id="recommendations" label="30100">
+      <group id="1">
+        <setting id="min_score" type="number" label="30101" help="30151">
+          <level>0</level>
+          <default>0.10</default>
+          <constraints>
+            <minimum>0.00</minimum>
+            <step>0.01</step>
+            <maximum>0.60</maximum>
+          </constraints>
+          <control type="slider" format="number"/>
+        </setting>
+        <setting id="max_per_seed" type="integer" label="30102" help="30152">
+          <level>0</level>
+          <default>2</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>10</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="seed_count" type="integer" label="30103" help="30153">
+          <level>0</level>
+          <default>10</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>50</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="result_count" type="integer" label="30104" help="30154">
+          <level>0</level>
+          <default>20</default>
+          <constraints>
+            <minimum>5</minimum>
+            <step>5</step>
+            <maximum>100</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+        <setting id="include_unfinished" type="boolean" label="30105" help="30155">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+      </group>
+    </category>
+    <category id="search" label="30130">
+      <group id="1">
+        <setting id="suggestion_count" type="integer" label="30131" help="30181">
+          <level>0</level>
+          <default>9</default>
+          <constraints>
+            <minimum>3</minimum>
+            <step>1</step>
+            <maximum>20</maximum>
+          </constraints>
+          <control type="slider" format="integer"/>
+        </setting>
+      </group>
+    </category>
+    <category id="external" label="30120">
+      <group id="1">
+        <setting id="use_external" type="boolean" label="30121" help="30171">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="show_outside_catalogue" type="boolean" label="30122" help="30172">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+          <dependencies>
+            <dependency type="enable" setting="use_external" operator="is">true</dependency>
+          </dependencies>
+        </setting>
+      </group>
+    </category>
+    <category id="ai" label="30140">
+      <group id="1">
+        <setting id="ai_enabled" type="boolean" label="30141" help="30191">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="ai_provider" type="string" label="30142" help="30192">
+          <level>0</level>
+          <default>openai_compatible</default>
+          <constraints>
+            <options>
+              <option label="30143">openai_compatible</option>
+              <option label="30144">anthropic</option>
+              <option label="30148">ia_nest</option>
+            </options>
+          </constraints>
+          <control type="list" format="string"/>
+          <dependencies>
+            <dependency type="enable" setting="ai_enabled" operator="is">true</dependency>
+          </dependencies>
+        </setting>
+        <setting id="ai_base_url" type="string" label="30145" help="30193">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string"/>
+          <dependencies>
+            <dependency type="enable" setting="ai_enabled" operator="is">true</dependency>
+          </dependencies>
+        </setting>
+        <setting id="ai_model" type="string" label="30146" help="30194">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string"/>
+          <dependencies>
+            <dependency type="enable" setting="ai_enabled" operator="is">true</dependency>
+          </dependencies>
+        </setting>
+        <setting id="ai_user_id" type="string" label="30149" help="30196">
+          <level>0</level>
+          <default>kodi.gg</default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string"/>
+          <dependencies>
+            <dependency type="enable" setting="ai_enabled" operator="is">true</dependency>
+          </dependencies>
+        </setting>
+        <setting id="ai_api_key" type="string" label="30147" help="30195">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string">
+            <hidden>true</hidden>
+          </control>
+          <dependencies>
+            <dependency type="enable" setting="ai_enabled" operator="is">true</dependency>
+          </dependencies>
+        </setting>
+      </group>
+    </category>
+    <category id="index" label="30110">
+      <group id="1">
+        <setting id="rich_index" type="boolean" label="30111" help="30161">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+        <setting id="rebuild_on_scan" type="boolean" label="30112" help="30162">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle"/>
+        </setting>
+      </group>
+    </category>
+  </section>
+</settings>

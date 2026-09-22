@@ -1,0 +1,1 @@
+		<value condition="System.AddonIsEnabled(plugin.video.content.adviser) + !System.HasHiddenInput">plugin://plugin.video.content.adviser/?action=autocomplete&amp;q=$INFO[Control.GetLabel(312).index(1)]</value>

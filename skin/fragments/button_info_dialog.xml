@@ -1,0 +1,8 @@
+					<include content="InfoDialogButton">
+						<param name="id" value="442" />
+						<param name="icon" value="icons/infodialogs/info.png" />
+						<param name="onclick_1" value="Dialog.Close(MovieInformation)" />
+						<param name="onclick_2" value="ActivateWindow(videos,&quot;plugin://plugin.video.content.adviser/?action=similar&amp;dbid=$INFO[ListItem.DBID]&quot;,return)" />
+						<param name="label" value="$ADDON[plugin.video.content.adviser 30010]" />
+						<param name="visible" value="System.AddonIsEnabled(plugin.video.content.adviser) + !String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,movie)" />
+					</include>

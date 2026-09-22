@@ -1,0 +1,6 @@
+			<item>
+				<label>$ADDON[plugin.video.content.adviser 30002]</label>
+				<onclick>ActivateWindow(videos,plugin://plugin.video.content.adviser/?action=ask&amp;type=tvshow,return)</onclick>
+				<thumb>DefaultAddonsSearch.png</thumb>
+				<visible>System.AddonIsEnabled(plugin.video.content.adviser) + !String.IsEmpty(Window(Home).Property(adviser.ask_ready))</visible>
+			</item>

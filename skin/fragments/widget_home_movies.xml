@@ -1,0 +1,6 @@
+						<include content="WidgetListPoster" condition="Library.HasContent(movies) + System.AddonIsEnabled(plugin.video.content.adviser)">
+							<param name="content_path" value="plugin://plugin.video.content.adviser/?action=history"/>
+							<param name="widget_header" value="$ADDON[plugin.video.content.adviser 30001]"/>
+							<param name="widget_target" value="videos"/>
+							<param name="list_id" value="5150"/>
+						</include>

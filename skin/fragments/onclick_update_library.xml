@@ -1,0 +1,1 @@
+						<onclick condition="System.AddonIsEnabled(service.nextcloud.sync)">RunScript(special://home/addons/service.nextcloud.sync/receive_library.py)</onclick>
