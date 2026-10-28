@@ -244,3 +244,11 @@ msgstr "Quién pregunta"
 msgctxt "#30196"
 msgid "Some services require it and can use it to remember. Only reaches the service you set."
 msgstr "Algunos servicios lo exigen y lo usan para recordar. Solo llega al servicio que configures."
+
+msgctxt "#30150"
+msgid "Service certificate authority"
+msgstr "Autoridad de certificación del servicio"
+
+msgctxt "#30197"
+msgid "Only if the service uses a certificate from its own authority: path to its .crt file. Blank: the system ones."
+msgstr "Solo si el servicio usa un certificado de una autoridad propia: ruta a su fichero .crt. En blanco, las del sistema."

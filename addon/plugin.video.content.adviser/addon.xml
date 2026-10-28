@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.content.adviser" name="Content Adviser" version="0.5.0" provider-name="IG">
+<addon id="plugin.video.content.adviser" name="Content Adviser" version="0.5.1" provider-name="IG">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
   </requires>
@@ -24,7 +24,10 @@
     <summary lang="en_GB">Recommends films and shows from your own library</summary>
     <description lang="es_ES">Recomienda contenido del catalogo que ya tienes: obras parecidas a la que estas mirando, y una seleccion a partir de lo ultimo que has visto. Funciona sin red y sin cuentas: lee tu biblioteca por JSON-RPC, asi que le da igual que use SQLite o MySQL, y construye un indice local en segundo plano. No escribe nada en tu biblioteca. Cuando no tiene una respuesta con suficiente confianza, calla en vez de rellenar con ruido.</description>
     <description lang="en_GB">Recommends content from the catalogue you already own: titles similar to the one you are looking at, and a selection based on what you watched last. Works with no network and no accounts: it reads your library over JSON-RPC, so it does not care whether it is backed by SQLite or MySQL, and builds a local index in the background. It never writes to your library. When it has no confident answer it stays quiet instead of padding the row with noise.</description>
-    <news>0.5.0
+    <news>0.5.1
+- La conexion opcional con servicios externos admite servicios con clave y con certificado de una autoridad propia.
+
+0.5.0
 - Se pueden encadenar generos con «y» y con «o», y no significan lo mismo: uno exige los dos, el otro se conforma con cualquiera.
 - Las sugerencias ya no piden decir si es pelicula o serie: el sistema ya lo sabe.
 - Los generos se ofrecen empezando por los que mas obras tienen en tu catalogo.

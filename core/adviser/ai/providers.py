@@ -70,18 +70,29 @@ def build_request(provider, base_url, model, system, user, api_key=None,
         return _join(base_url, "v1/messages"), headers, body
 
     if provider == IA_NEST:
+        # Detras de una puerta con clave, la clave dice quien pregunta y la
+        # identidad la pone la puerta: de la propia solo viaja la sesion, que es
+        # lo unico que la puerta respeta. Sin clave (el servicio a pelo), entera.
+        if api_key:
+            headers["Authorization"] = "Bearer %s" % api_key
         # `prompt.run` recibe **un solo prompt**, no una conversacion con papeles.
         # Se unen las dos partes en vez de tirar la de sistema, que es la que
-        # fija el formato de la respuesta.
-        body = {"prompt": "%s\n\n%s" % (system, user), "domain": "general"}
+        # fija el formato de la respuesta. Y no deja huella: traducir una peticion
+        # a un filtro no es una conversacion que el servicio deba recordar.
+        body = {"prompt": "%s\n\n%s" % (system, user), "domain": "general",
+                "write_back": False}
         if model:
             body["model"] = model
         if identity:
             # **Tiene que ser un objeto**: comprobado contra el servicio real,
             # una cadena da `identity debe ser un objeto`. Lleva quien pregunta,
             # desde donde, y una sesion, que es lo que permite a ese servicio
-            # relacionar varias preguntas entre si.
+            # relacionar varias preguntas entre si; y el servicio la exige para
+            # contestar.
             body["identity"] = dict(identity)
+            if api_key:
+                body["identity"] = {k: v for k, v in body["identity"].items()
+                                    if k == "session_id"}
         return _join(base_url, "prompt/run"), headers, body
 
     raise ProviderError("proveedor desconocido: %r" % (provider,))

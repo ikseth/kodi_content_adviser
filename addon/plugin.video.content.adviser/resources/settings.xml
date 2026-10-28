@@ -149,6 +149,17 @@
             <dependency type="enable" setting="ai_enabled" operator="is">true</dependency>
           </dependencies>
         </setting>
+        <setting id="ai_ca_file" type="string" label="30150" help="30197">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string"/>
+          <dependencies>
+            <dependency type="enable" setting="ai_enabled" operator="is">true</dependency>
+          </dependencies>
+        </setting>
       </group>
     </category>
     <category id="index" label="30110">
