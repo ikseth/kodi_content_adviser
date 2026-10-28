@@ -308,3 +308,32 @@ def test_un_genero_inventado_tampoco_cuela_por_la_via_del_y():
 
 def test_una_consulta_con_solo_genres_all_no_esta_vacia():
     assert not parse_query('{"genres_all": ["Drama"]}', GENEROS).is_empty
+
+
+# --- IA_NEST detras de una puerta con clave ---------------------------------
+
+def test_ia_nest_con_clave_la_manda_como_bearer():
+    """Una puerta con clave por cuenta: sin ella, rechaza."""
+    _, headers, _ = _peticion(IA_NEST, base_url="https://puerta:8080/rest",
+                              api_key="cuenta.secreto")
+    assert headers["Authorization"] == "Bearer cuenta.secreto"
+
+
+def test_ia_nest_sin_clave_no_inventa_una():
+    _, headers, _ = _peticion(IA_NEST, base_url="http://x:8001")
+    assert "Authorization" not in headers
+
+
+def test_ia_nest_con_clave_solo_manda_su_sesion():
+    """Con clave, quien pregunta lo dice la clave y la identidad la pone la puerta;
+    la sesion sigue viajando porque el servicio la exige para contestar."""
+    _, _, body = _peticion(IA_NEST, base_url="https://puerta:8080/rest", api_key="k",
+                           identity={"user_id": "x", "service": "s", "session_id": "1"})
+    assert body["identity"] == {"session_id": "1"}
+
+
+def test_ia_nest_no_deja_huella_en_la_memoria():
+    """Traducir una peticion a un filtro no es una conversacion que recordar."""
+    for clave in (None, "k"):
+        _, _, body = _peticion(IA_NEST, base_url="http://x:8001", api_key=clave)
+        assert body["write_back"] is False

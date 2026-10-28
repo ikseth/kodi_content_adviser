@@ -148,5 +148,9 @@ class Addon:
         return (self._addon.getSetting("ai_api_key") or "").strip()
 
     @property
+    def ai_ca_file(self):
+        return (self._addon.getSetting("ai_ca_file") or "").strip()
+
+    @property
     def rebuild_on_scan(self):
         return self._flag("rebuild_on_scan", True)

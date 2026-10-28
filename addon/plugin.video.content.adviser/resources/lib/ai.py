@@ -10,11 +10,13 @@ expresa del usuario, fallar rapido y decirlo es mejor que esperar indefinidament
 """
 
 import json
+import ssl
 import time
 import urllib.error
 import urllib.request
 
 import xbmc
+import xbmcvfs
 from adviser.ai import build_prompt, build_request, parse_query, parse_response
 from adviser.ai.providers import ProviderError
 from adviser.ai.query import SYSTEM_PROMPT
@@ -64,13 +66,25 @@ def identity_of(settings):
             "session_id": sesion or "sin-sesion"}
 
 
-def _post(url, headers, body):
+def _tls_context(settings):
+    """Contexto TLS con la autoridad declarada, o `None` para las del sistema.
+
+    Un servicio propio suele llevar un certificado de una autoridad propia. Se
+    confia en ella declarandola, no apagando la verificacion: sin verificar, la
+    conexion va cifrada pero cualquiera podria hacerse pasar por el servicio.
+    """
+    if not settings.ai_ca_file:
+        return None
+    return ssl.create_default_context(cafile=xbmcvfs.translatePath(settings.ai_ca_file))
+
+
+def _post(url, headers, body, context=None):
     payload = json.dumps(body).encode("utf-8")
     request = urllib.request.Request(url, payload, headers)
     last = None
     for attempt in range(2):
         try:
-            with urllib.request.urlopen(request, timeout=TIMEOUT) as response:
+            with urllib.request.urlopen(request, timeout=TIMEOUT, context=context) as response:
                 return json.load(response)
         except urllib.error.HTTPError as error:
             # Un 4xx no mejora esperando: es la peticion, no el momento.
@@ -96,7 +110,11 @@ def ask(settings, request_text, media_type="movie"):
     except ProviderError as error:
         raise AiError(str(error)) from None
 
-    answer = _post(url, headers, body)
+    try:
+        context = _tls_context(settings)
+    except (OSError, ssl.SSLError) as error:
+        raise AiError("autoridad de certificacion: %s" % error) from None
+    answer = _post(url, headers, body, context)
     try:
         text = parse_response(settings.ai_provider, answer)
         return parse_query(text, catalogue_genres), catalogue_genres
