@@ -1,0 +1,8 @@
+						<item>
+							<label>$ADDON[service.ha_link 32100]</label>
+							<onclick>RunPlugin(plugin://service.ha_link/?abrir=inicio)</onclick>
+							<property name="menu_id">$NUMBER[22000]</property>
+							<thumb>special://home/addons/service.ha_link/resources/skins/Default/media/k2/glifos/home.png</thumb>
+							<property name="id">ha_link</property>
+							<visible>System.AddonIsEnabled(service.ha_link)</visible>
+						</item>
