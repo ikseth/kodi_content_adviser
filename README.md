@@ -45,6 +45,12 @@ uno. Sin el clon se pierde la fila, no el producto. Se genera a partir del Estua
 de la version de Kodi que se vaya a usar, y se regenera al subir de version: no se
 mantiene un skin, se mantiene un parche.
 
+El clon tambien aloja secciones de otros complementos de la misma familia, cada una
+solo visible si su complemento esta activo. Desde `adviser.4`: **«Casa»**, de
+[HA Link](https://github.com/ikseth/kodi-addon-ha-link) (`service.ha_link`), una entrada
+del menu principal con tres filas (lo encendido o en alerta, el area de este Kodi y las
+estancias). Las baldosas las genera ese repo; aqui se copian en `skin/fragments/`.
+
 Se entrega en dos niveles. **El complemento** funciona en cualquier Kodi con cualquier skin,
 lee la biblioteca por JSON-RPC —asi que le da igual que use SQLite o MySQL— y no depende de
 ningun servicio externo para funcionar. **Un clon del skin Estuary**, opcional y distribuible

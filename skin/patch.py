@@ -85,6 +85,25 @@ INFO_BUTTON = _fragment("button_info_dialog.xml")
 UPDATE_ANCHOR = _fragment("anchor_update_library.xml")
 UPDATE_ONCLICK = _fragment("onclick_update_library.xml")
 
+# Seccion «Casa» de HA Link (`service.ha_link`, repo kodi-addon-ha-link): una
+# entrada del menu principal y, a su derecha, tres filas (lo que esta encendido o
+# en alerta, el area de este Kodi y las estancias). Como la fila del recomendador,
+# **solo existe si ese complemento esta activo**: sin el, Estuary queda como era.
+#
+# Va delante del «Tiempo», que es lo mas parecido que tiene Estuary. Las baldosas
+# son las de la ventana propia de HA Link: el include lo genera ese repo
+# (herramientas/generar_ventanas.py -> estuary/include_ha_link_inicio.xml) y aqui
+# se copia tal cual; se cambia alli, no aqui.
+HA_LINK_ID = "service.ha_link"
+HA_LINK_MENU_ANCHOR = _fragment("anchor_home_menu_weather.xml")
+HA_LINK_MENU_ITEM = _fragment("item_home_menu_ha_link.xml")
+HA_LINK_GROUP_ANCHOR = _fragment("anchor_home_weather_group.xml")
+HA_LINK_GROUP = _fragment("widget_home_ha_link.xml")
+HA_LINK_INCLUDE_ANCHOR = _fragment("anchor_includes_categories.xml")
+HA_LINK_INCLUDE = "".join(
+    linea for linea in _fragment("include_ha_link_inicio.xml").splitlines(True)
+    if not linea.startswith("<?xml"))
+
 
 class PatchError(RuntimeError):
     pass
@@ -158,6 +177,24 @@ def _insert_after(path, anchor, addition, what):
     _write(path, text[:start] + addition + text[start:])
 
 
+def _insert_before(path, anchor, addition, what):
+    text = _read(path)
+    if anchor not in text:
+        raise PatchError(
+            "Estuary ha cambiado: no se encuentra %s en %s. Hay que revisar el "
+            "ancla del parche antes de seguir." % (what, path))
+    if addition in text:
+        raise PatchError("el parche de %s ya estaba aplicado en %s" % (what, path))
+    start = text.index(anchor)
+    _write(path, text[:start] + addition + text[start:])
+
+
+def _patch_ha_link(home, includes):
+    _insert_before(home, HA_LINK_MENU_ANCHOR, HA_LINK_MENU_ITEM, "la entrada del Tiempo en el menu")
+    _insert_before(home, HA_LINK_GROUP_ANCHOR, HA_LINK_GROUP, "las filas del Tiempo")
+    _insert_before(includes, HA_LINK_INCLUDE_ANCHOR, HA_LINK_INCLUDE, "el include de categorias")
+
+
 def _patch_submenus(path):
     for anchor_name, item_name in SUBMENU:
         _insert_after(path, _fragment(anchor_name), _fragment(item_name),
@@ -177,7 +214,7 @@ def _patch_info_dialog(path):
 # **Se sube a mano cuando cambia el parche.** El clon hereda la version de
 # Estuary, asi que sin este sufijo dos clones distintos del mismo Estuary se
 # llamarian igual, y un equipo no tendria forma de saber que hay uno mas nuevo.
-PATCH_VERSION = "adviser.3"
+PATCH_VERSION = "adviser.4"
 
 
 def _patch_update_library(path):
@@ -215,5 +252,6 @@ def apply(skin_dir, version_suffix=PATCH_VERSION):
     _patch_submenus(includes)
     _patch_info_dialog(info)
     _patch_update_library(navigation)
+    _patch_ha_link(home, includes)
     return {"upstream_version": upstream, "skin_id": SKIN_ID,
             "version": "%s+%s" % (upstream, version_suffix)}

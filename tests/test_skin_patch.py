@@ -27,11 +27,15 @@ MANIFIESTO = (
 
 
 def _estuary_falso(raiz, con_ancla=True, con_teclado=True,
-                   con_submenus=True, con_ficha=True, con_actualizar=True):
+                   con_submenus=True, con_ficha=True, con_actualizar=True, con_tiempo=True):
     os.makedirs(os.path.join(raiz, "xml"), exist_ok=True)
     with open(os.path.join(raiz, "addon.xml"), "w", encoding="utf-8") as handle:
         handle.write(MANIFIESTO)
     cuerpo = patch.ANCHOR + "\t\t\t\t\t\t</include>\n" if con_ancla else "\t\t<!-- otra cosa -->\n"
+    if con_tiempo:
+        cuerpo += (patch.HA_LINK_GROUP_ANCHOR + "\t\t\t\t</control>\n"
+                   + "<control type=\"fixedlist\" id=\"9000\"><content>\n"
+                   + patch.HA_LINK_MENU_ANCHOR + "\t\t\t\t\t\t</item>\n</content></control>\n")
     with open(os.path.join(raiz, "xml", "Home.xml"), "w", encoding="utf-8") as handle:
         handle.write("<window>\n<controls>\n" + cuerpo + "</controls>\n</window>\n")
     variables = patch.KEYBOARD_ANCHOR + "\t\t<value>algo</value>\n\t</variable>\n" \
@@ -44,7 +48,8 @@ def _estuary_falso(raiz, con_ancla=True, con_teclado=True,
         for anchor_name, _ in patch.SUBMENU:
             submenus += patch._fragment(anchor_name) + "\t\t</content>\n\t</include>\n"
     with open(os.path.join(raiz, "xml", "Includes_Home.xml"), "w", encoding="utf-8") as handle:
-        handle.write("<includes>\n" + submenus + "</includes>\n")
+        categorias = (patch.HA_LINK_INCLUDE_ANCHOR + "\t</include>\n") if con_tiempo else ""
+        handle.write("<includes>\n" + submenus + categorias + "</includes>\n")
 
     botones = patch.INFO_ANCHOR + '\t\t\t\t\t\t<param name="label" value="x" />\n' \
         "\t\t\t\t\t</include>\n" if con_ficha else "\t\t<!-- otra cosa -->\n"
@@ -264,5 +269,37 @@ def test_las_dos_acciones_se_excluyen(tmp_path):
 
 def test_revienta_si_estuary_cambia_el_boton_de_actualizar(tmp_path):
     raiz = _estuary_falso(str(tmp_path / "skin"), con_actualizar=False)
+    with pytest.raises(patch.PatchError):
+        patch.apply(raiz)
+
+
+# --- seccion «Casa» de HA Link ---------------------------------------------------------------------
+def test_casa_entra_en_el_menu_delante_del_tiempo_y_solo_con_ha_link(tmp_path):
+    raiz = _estuary_falso(str(tmp_path / "skin"))
+    patch.apply(raiz)
+    home = open(os.path.join(raiz, "xml", "Home.xml"), encoding="utf-8").read()
+    assert home.index(patch.HA_LINK_MENU_ITEM) < home.index(patch.HA_LINK_MENU_ANCHOR)
+    assert home.index(patch.HA_LINK_GROUP) < home.index(patch.HA_LINK_GROUP_ANCHOR)
+    arbol = ET.fromstring(home)
+    entrada = [i for i in arbol.iter("item") if (i.findtext("label") or "").startswith("$ADDON[service.ha_link")]
+    assert entrada and entrada[0].findtext("visible") == "System.AddonIsEnabled(service.ha_link)"
+    filas = [p.get("value") for p in arbol.iter("param")
+             if p.get("name") == "content_path" and "service.ha_link" in p.get("value")]
+    assert [f.split("?")[1].split("&")[0] for f in filas] == ["fila=ahora", "fila=aqui", "fila=estancias"]
+    assert all("Window(Home).Property(ha_link.rev_" in f for f in filas)
+
+
+def test_el_include_de_las_baldosas_va_en_includes_home_y_es_xml(tmp_path):
+    raiz = _estuary_falso(str(tmp_path / "skin"))
+    patch.apply(raiz)
+    texto = open(os.path.join(raiz, "xml", "Includes_Home.xml"), encoding="utf-8").read()
+    arbol = ET.fromstring(texto)
+    nombres = [i.get("name") for i in arbol.findall("include")]
+    assert "HaLinkFila" in nombres and nombres.index("HaLinkFila") < nombres.index("WidgetListCategories")
+    assert "<?xml" not in texto.split("\n", 1)[1]
+
+
+def test_revienta_si_estuary_ya_no_tiene_el_tiempo(tmp_path):
+    raiz = _estuary_falso(str(tmp_path / "skin"), con_tiempo=False)
     with pytest.raises(patch.PatchError):
         patch.apply(raiz)

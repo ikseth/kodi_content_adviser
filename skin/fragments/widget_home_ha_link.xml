@@ -1,0 +1,29 @@
+				<control type="group" id="22000">
+					<visible>String.IsEqual(Container(9000).ListItem.Property(id),ha_link)</visible>
+					<include content="Visible_Right_Delayed">
+						<param name="id" value="ha_link"/>
+					</include>
+					<control type="grouplist" id="22001">
+						<include>WidgetGroupListCommon</include>
+						<pagecontrol>22010</pagecontrol>
+						<include content="HaLinkFila">
+							<param name="content_path" value="plugin://service.ha_link/?fila=ahora&amp;r=$INFO[Window(Home).Property(ha_link.rev_ahora)]"/>
+							<param name="widget_header" value="$ADDON[service.ha_link 32105]"/>
+							<param name="list_id" value="22100"/>
+						</include>
+						<include content="HaLinkFila">
+							<param name="content_path" value="plugin://service.ha_link/?fila=aqui&amp;r=$INFO[Window(Home).Property(ha_link.rev_aqui)]"/>
+							<param name="widget_header" value="$INFO[Window(Home).Property(ha_link.aqui)]"/>
+							<param name="list_id" value="22200"/>
+							<param name="visible" value="!String.IsEmpty(Window(Home).Property(ha_link.aqui))"/>
+						</include>
+						<include content="HaLinkFila">
+							<param name="content_path" value="plugin://service.ha_link/?fila=estancias&amp;r=$INFO[Window(Home).Property(ha_link.rev_estancias)]"/>
+							<param name="widget_header" value="$ADDON[service.ha_link 32114]"/>
+							<param name="list_id" value="22300"/>
+						</include>
+					</control>
+					<include content="WidgetScrollbar" condition="Skin.HasSetting(touchmode)">
+						<param name="scrollbar_id" value="22010"/>
+					</include>
+				</control>
