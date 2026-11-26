@@ -214,7 +214,7 @@ def _patch_info_dialog(path):
 # **Se sube a mano cuando cambia el parche.** El clon hereda la version de
 # Estuary, asi que sin este sufijo dos clones distintos del mismo Estuary se
 # llamarian igual, y un equipo no tendria forma de saber que hay uno mas nuevo.
-PATCH_VERSION = "adviser.4"
+PATCH_VERSION = "adviser.5"
 
 
 def _patch_update_library(path):
